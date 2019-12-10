@@ -1,0 +1,500 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
+
+$font-stack: "Open Sans", sans-serif;
+$font-sizes: ("small": 12px, "medium": 15px, "large": 24px);
+$primary-color: rgb(68, 140, 203);
+$font-color-primary: #ffffff;
+$font-color-secondary: #000000;
+$breakpoints: (
+        phone: 428px,
+        sm_tablet: 600px,
+        tablet: 768px,
+        desktop: 1024px
+);
+$space-between-blocks: 70px;
+$block-left-margin: 96px;
+
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (max-width: map-get($map: $breakpoints, $key: "phone")) {
+      @content;
+    }
+  } @else if $media == medium-screens {
+    @media only screen and (min-width: map-get($map: $breakpoints, $key: "phone") + 1) and (max-width: map-get($map: $breakpoints, $key: "tablet") - 1) {
+      @content;
+    }
+  } @else if $media == sm_tablet {
+    @media only screen and (max-width: map-get($map: $breakpoints, $key: "sm_tablet")) {
+      @content;
+    }
+  } @else if $media == wide-screens {
+    @media only screen and (max-width: map-get($map: $breakpoints, $key: "desktop")) {
+      @content;
+    }
+  } @else if $media == container {
+    @media only screen and (max-width: 1299px) {
+      @content;
+    }
+  } @else if $media == navigation {
+    @media only screen and (max-width: 435px) {
+      @content;
+    }
+  }
+}
+
+@mixin underscore($color) {
+
+  width: 50px;
+  border: 5px solid $color;
+  margin-top: 26px;
+  margin-bottom: 26px;
+}
+
+@mixin button($color) {
+  border: 2px solid $color;
+  padding: 5px;
+  text-decoration: none;
+  color: $color;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+body {
+  font-family: $font-stack;
+  max-width: 1299.98px;
+  margin: 0 auto;
+}
+
+.page-nav {
+  background: $primary-color;
+  color: $font-color-primary;
+  text-transform: uppercase;
+  margin-bottom: $space-between-blocks;
+  padding: 8px 48px 32px $block-left-margin;
+  @include respond-to(container) {
+    margin-bottom: 0
+  }
+  @include respond-to(medium-screens) {
+    padding: 1px;
+  }
+  @include respond-to(handhelds) {
+    padding: 0
+  }
+
+  .nav-list-upper ul {
+    padding: 0;
+    margin: 0 0 16px 0;
+    text-align: left;
+    font-size: map-get($map: $font-sizes, $key: "small");
+    @include respond-to(container) {
+      text-align: center;
+    }
+
+    li {
+      display: inline;
+
+      &.separator {
+        @include respond-to(navigation) {
+          display: none;
+        }
+      }
+
+      a {
+        text-decoration: none;
+        color: $font-color-primary;
+
+        &:hover {
+          color: $font-color-secondary;
+        }
+      }
+    }
+  }
+
+  .demo-logo {
+    font-size: map-get($map: $font-sizes, $key: "large");
+    width: 20%;
+    float: left;
+    @include respond-to(sm_tablet) {
+      display: none;
+    }
+  }
+
+  .nav-list-lower {
+    width: 100%;
+    text-align: right;
+    @include respond-to(sm_tablet) {
+      text-align: center;
+    }
+
+    ul {
+      padding: 0;
+      list-style: none;
+      font-size: map-get($map: $font-sizes, $key: "medium");
+      @include respond-to(handhelds) {
+        margin: 0
+      }
+
+      li {
+        display: inline-block;
+        position: relative;
+
+        a {
+          display: block;
+          padding: 5px 15px;
+          color: $font-color-primary;;
+          text-decoration: none;
+          font-weight: bold;
+
+          &:hover {
+            color: $font-color-secondary;
+          }
+        }
+
+        ul.dropdown {
+          min-width: 100%;
+          width: 160px;
+          background: #080808;
+          display: none;
+          position: absolute;
+          right: -40px;
+          z-index: 999;
+          line-height: 23px;
+          text-align: left;
+          padding: 15px 1px 15px 1px;
+        }
+
+        &:hover ul.dropdown {
+          display: block;
+          border: 1px solid $font-color-secondary;
+          text-align: left;
+        }
+
+        & li {
+          display: block;
+
+          & a:hover {
+            color: $font-color-secondary;
+            background-color: $font-color-primary;
+          }
+        }
+      }
+    }
+  }
+}
+
+.welcome-section-root {
+  display: inline-block;
+  margin-bottom: $space-between-blocks;
+  max-width: 1300px;
+  @include respond-to(container) {
+    display: block;
+    margin-bottom: 0;
+  }
+
+  .welcome-block {
+    margin-left: $block-left-margin;
+    margin-right: $space-between-blocks;
+    padding: 48px 40px 48px 40px;
+    $top-bottom-padding: 96px;
+    height: 547px - $top-bottom-padding;
+    float: left;
+    background-color: $primary-color;
+    color: $font-color-primary;
+    @include respond-to(container) {
+      margin: 0;
+    }
+    @media only screen and (max-width: 930px) {
+      float: none;
+      text-align: center;
+      padding: 10px;
+      height: 350px;
+    }
+
+    .underscore {
+      @include underscore($font-color-primary);
+      @media only screen and (max-width: 930px) {
+        border-style: dashed;
+        width: 100%;
+      }
+    }
+
+    span {
+      font-size: 41px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .btn {
+      @include button($font-color-primary);
+      float: right;
+      background-color: rgb(12, 154, 236);
+      margin-top: 110px;
+      @media only screen and (max-width: 930px) {
+        float: none;
+      }
+
+      &:hover {
+        background-color: $font-color-secondary;
+      }
+    }
+  }
+
+  .picture-block {
+    float: right;
+    margin-right: 160px;
+    max-width: 640px;
+    @include respond-to(container) {
+      margin: 0
+    }
+    @media only screen and (max-width: 930px) {
+      float: none;
+      max-width: inherit;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    h3 {
+      font-size: 19px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .img-text-block {
+      padding: 15px 70px 20px 70px;
+      background-color: rgb(215, 215, 215);
+      color: $font-color-secondary;
+      @include respond-to(sm_tablet) {
+        padding: 10px;
+      }
+    }
+  }
+}
+
+.web-development-section-root {
+  padding: $space-between-blocks $block-left-margin;
+  max-width: 1300px;
+  background-color: $primary-color;
+  display: inline-block;
+  @media only screen and (max-width: 1050px) {
+    padding: 30px;
+  }
+  @media only screen and (max-width: 300px) {
+    padding: 1px;
+  }
+
+  .web-development-block {
+    float: left;
+    color: $font-color-primary;
+    width: 250px;
+
+    @include respond-to(container) {
+      width: 100%;
+    }
+
+    h4 {
+      text-transform: uppercase;
+    }
+  }
+
+  .wireframe-block {
+    float: left;
+    margin-left: 107px;
+    width: 750px;
+    color: $font-color-primary;
+    @include respond-to(container) {
+      float: none;
+      width: 100%;
+      margin-left: 0;
+    }
+
+    h4 {
+      text-transform: uppercase;
+    }
+
+    .custom-list-block {
+      background-color: $font-color-primary;
+      color: $font-color-secondary;
+      padding: 15px;
+      height: 275px;
+      @include respond-to(sm_tablet) {
+        height: 400px;
+      }
+      @include respond-to(handhelds) {
+        height: 350px;
+        font-size: 12px;
+      }
+
+      .custom-list-left {
+        width: 50%;
+        float: left;
+        margin-right: 15px;
+        @include respond-to(sm_tablet) {
+          width: 100%;
+          float: none;
+        }
+
+        ul#dynamic-list {
+          list-style: none;
+          padding: 0;
+          line-height: 25px;
+          font-style: italic;
+
+          li {
+            border-bottom: 1px solid $font-color-secondary;
+
+            &:last-child {
+              border: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.contact-section-root {
+  padding: $space-between-blocks $block-left-margin;
+  max-width: 1300px;
+  display: inline-block;
+  @include respond-to(container) {
+    display: block;
+    padding-top: 10px;
+  }
+  @include respond-to(sm_tablet) {
+    padding: 10px;
+  }
+
+  .contact-text-block {
+    float: left;
+    max-width: 600px;
+    @media only screen and (max-width: 1155px) {
+      max-width: unset;
+    }
+
+    span {
+      text-transform: uppercase;
+      font-size: 41px;
+      font-weight: bold;
+    }
+
+    .underscore {
+      @include underscore($font-color-secondary)
+    }
+  }
+
+  .contact-form-block {
+    float: right;
+    max-width: 600px;
+    margin-left: 100px;
+    margin-top: 100px;
+    text-transform: uppercase;
+    @include respond-to(container) {
+      margin: 0;
+    }
+    @media only screen and (max-width: 1155px) {
+      float: none;
+    }
+  }
+
+  form {
+    font-weight: bold;
+
+    input {
+      height: 54px;
+    }
+
+    textarea {
+      height: 186px;
+    }
+
+    input, textarea {
+      padding: 15px;
+      width: 364px;
+      margin-bottom: 10px;
+      margin-top: 5px;
+      border: 2px solid rgb(232, 232, 233);
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      @media only screen and (max-width: 500px) {
+        width: 100%;
+      }
+
+      &:focus {
+        outline: none;
+        border: 3px solid $font-color-secondary;
+      }
+    }
+
+    button {
+      @include button($primary-color);
+      cursor: pointer;
+      width: 66px;
+      height: 38px;
+      background-color: $font-color-primary;
+    }
+  }
+}
+
+.footer {
+  background-color: rgb(30, 33, 35);
+  padding: 15px $block-left-margin;
+  display: inline-block;
+  max-width: 1300px;
+  @include respond-to(wide-screens) {
+    padding: 5px;
+  }
+
+  .footer-text {
+    padding: 10px;
+    float: left;
+    max-width: 50%;
+    font-size: 14px;
+    @media only screen and (max-width: 800px) {
+      max-width: 100%;
+    }
+
+    p {
+      color: rgb(133, 133, 133);
+    }
+  }
+
+  .footer-navigation {
+    float: right;
+    padding-right: 10px;
+
+    ul {
+      text-transform: uppercase;
+      font-size: 13px;
+
+      li {
+        display: inline;
+        font-weight: bold;
+        margin-left: 10px;
+
+        a {
+          text-decoration: none;
+          color: $font-color-primary;
+
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+
+    .copyright-text {
+      font-size: 11px;
+      color: $font-color-primary;
+      text-align: right;
+      margin-top: 80px;
+      @media only screen and (max-width: 800px) {
+        margin: 0;
+      }
+    }
+  }
+}
