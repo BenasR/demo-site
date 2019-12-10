@@ -1,3 +1,1 @@
-Demo site
-Realtime representation.
-https://representation.netlify.com/
+Realtime representation at https://representation.netlify.com/
